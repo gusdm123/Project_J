@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Projectile_normal : MonoBehaviour
 {
     public LayerMask collsionMask;
+    public GameObject hitEffect;
+
     float speed = 10f;
     float damage = 1;
 
@@ -39,6 +42,10 @@ public class Projectile_normal : MonoBehaviour
         {
             damageableObject.TakeHit(damage, hit);
         }
+
+        GameObject playhitEffect = Instantiate(hitEffect, transform.position, transform.rotation);
+        playhitEffect.SetActive(true);
+        Destroy(playhitEffect, 1.0f);
 
         GameObject.Destroy(gameObject);
     }
