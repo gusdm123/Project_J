@@ -20,33 +20,25 @@ public class Projectile_normal : MonoBehaviour
     void Update()
     {
         float moveDistance = speed * Time.deltaTime;
-        CheckCollisions(moveDistance);
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
 
-    void CheckCollisions(float moveDistance) {
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, moveDistance, collsionMask, QueryTriggerInteraction.Collide))
-        {
-            OnHitObject(hit);
-        }
-    }
-
-    void OnHitObject(RaycastHit hit)
+    private void OnTriggerEnter(Collider other)
     {
-        IDamageable damageableObject = hit.collider.GetComponent<IDamageable>();
-
-        if (damageableObject != null)
+        if (other.tag == "Enemy")
         {
-            damageableObject.TakeHit(damage, hit);
+            IDamageable damageableObject = other.GetComponent<IDamageable>();
+
+            if (damageableObject != null)
+            {
+                damageableObject.TakeHit(damage, other);
+            }
+
+            GameObject playhitEffect = Instantiate(hitEffect, transform.position, transform.rotation);
+            playhitEffect.SetActive(true);
+            Destroy(playhitEffect, 1.0f);
+
+            GameObject.Destroy(gameObject);
         }
-
-        GameObject playhitEffect = Instantiate(hitEffect, transform.position, transform.rotation);
-        playhitEffect.SetActive(true);
-        Destroy(playhitEffect, 1.0f);
-
-        GameObject.Destroy(gameObject);
     }
 }

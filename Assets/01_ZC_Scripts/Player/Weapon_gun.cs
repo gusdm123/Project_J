@@ -6,7 +6,7 @@ public class Weapon_gun : MonoBehaviour
 {
     public Transform muzzle;
     public GameObject muzzleEffect;
-    public Projectile_normal projectile;
+    public GameObject[] projectile;
     public float msBetweenShots = 100;
     public float muzzleVelocity = 35;
 
@@ -17,11 +17,11 @@ public class Weapon_gun : MonoBehaviour
         if (Time.time > nextShotTime)
         {
             nextShotTime = Time.time + msBetweenShots / 1000;
-            Projectile_normal newProjectile = Instantiate(projectile, muzzle.position, muzzle.rotation) as Projectile_normal;
+            GameObject newProjectile = Instantiate(projectile[0], muzzle.position, muzzle.rotation);
             GameObject playMuzzleEffect = Instantiate(muzzleEffect, muzzle.position, muzzle.rotation);
             Destroy(playMuzzleEffect, 0.5f);
 
-            newProjectile.SetSpeed(muzzleVelocity);
+            newProjectile.GetComponent<Projectile_normal>().SetSpeed(muzzleVelocity);
             GameObject.Destroy(newProjectile.gameObject,3f);
         }
     }

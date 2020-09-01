@@ -260,8 +260,11 @@ MonoBehaviour:
   muzzle: {fileID: 1080002370}
   muzzleEffect: {fileID: 1580551768239302, guid: e9abd3a65173fa6479b7768e157c226b,
     type: 3}
-  projectile: {fileID: 6931002568630470868, guid: 0ed43afbdbf134f4daae9ce498753825,
-    type: 3}
+  projectile:
+  - {fileID: 8403715598752546746, guid: 0ed43afbdbf134f4daae9ce498753825, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   msBetweenShots: 75
   muzzleVelocity: 35
 --- !u!1 &58186517

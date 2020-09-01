@@ -26,7 +26,7 @@ public class LivingEntity : MonoBehaviour , IDamageable
         _hpbar.targetTr = this.gameObject.transform;
     }
 
-    public void TakeHit(float damage, RaycastHit hit)
+    public void TakeHit(float damage, Collider hit)
     {
         health -= damage;
         hpSlider.value = health / startingHealth;
