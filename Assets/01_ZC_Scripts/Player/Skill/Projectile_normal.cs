@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class Projectile_normal : MonoBehaviour
 {
-    public LayerMask collsionMask;
-    public GameObject hitEffect;
-
+    public Skill_Projectile current_Skill;
+    public bool buffSkillCheck = false;
+    public GameObject muzzleEffect;
     float speed = 10f;
-    float damage = 1;
 
     public void SetSpeed(float newSpeed)
     {
@@ -27,18 +26,7 @@ public class Projectile_normal : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            IDamageable damageableObject = other.GetComponent<IDamageable>();
-
-            if (damageableObject != null)
-            {
-                damageableObject.TakeHit(damage, other);
-            }
-
-            GameObject playhitEffect = Instantiate(hitEffect, transform.position, transform.rotation);
-            playhitEffect.SetActive(true);
-            Destroy(playhitEffect, 1.0f);
-
-            GameObject.Destroy(gameObject);
+            current_Skill.ProjectileSkillEffect(other,gameObject);
         }
     }
 }
