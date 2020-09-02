@@ -28,7 +28,7 @@ public class LivingEntity : MonoBehaviour , IDamageable
 
     public void TakeHit(float damage, Collider hit)
     {
-        health -= damage;
+        health -= damage * Weapon_gun.instance.FinalDamage;
         hpSlider.value = health / startingHealth;
 
         if (health <= 0) {

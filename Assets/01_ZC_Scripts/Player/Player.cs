@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : LivingEntity
 {
@@ -8,12 +9,10 @@ public class Player : LivingEntity
     WaitForSeconds time_deltatime; // deltaTime 변수
 
     PlayerController controller;
-    Weapon_gun gunController;
 
-    void Start()
+    private void Start()
     {
         controller = GetComponent<PlayerController>(); // 플레이어를 조작해주는 컴포넌트
-        gunController = GetComponent<Weapon_gun>();
 
         time_deltatime = new WaitForSeconds(Time.deltaTime); // 미리 선언을 해줌으로써 지속적인 오버헤드를 줄여준다.
         viewCamera = Camera.main; // 카메라에 메인 카메라를 담아준다.
@@ -25,20 +24,24 @@ public class Player : LivingEntity
     {
         while (true)
         {
-            Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-            float rayDistance;
-
-            if (groundPlane.Raycast(ray, out rayDistance))
+            if (EventSystem.current.IsPointerOverGameObject() == true)
             {
-                Vector3 point = ray.GetPoint(rayDistance);
-                Debug.DrawLine(ray.origin,point,Color.red);
-                controller.LookAt(point);
+                yield return time_deltatime;
             }
-
-            if (Input.GetMouseButton(0))
+            else
             {
-                gunController.Shoot();
+                Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
+                Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+                float rayDistance;
+
+                groundPlane.Raycast(ray, out rayDistance);
+
+                if (Input.GetMouseButton(0))
+                {
+                    Vector3 point = ray.GetPoint(rayDistance);
+                    controller.LookAt(point);
+                    Weapon_gun.instance.Shoot();
+                }
             }
 
             yield return time_deltatime;
