@@ -102,6 +102,25 @@ public class Weapon_gun : MonoBehaviour
         }
     }
 
+    public void SetForthprojectile()
+    {
+        if (forthProjectile.GetComponent<Projectile_normal>().buffSkillCheck == true)
+        {
+            forthProjectile.GetComponent<Projectile_normal>().current_Skill.BuffSkillEffect();
+        }
+        else
+        {
+            if (currentProjectile == forthProjectile)
+            {
+                currentProjectile = baseProjectile;
+            }
+            else
+            {
+                currentProjectile = forthProjectile;
+            }
+        }
+    }
+
     //스킬이 버프인거를 체크 한뒤에 버프일 경우 SkillEffect 발동
 
     #endregion

@@ -97,7 +97,11 @@ MonoBehaviour:
   startingHealth: 2
   hpBarPrefab: {fileID: 5635559764718249627, guid: 80c5b5a0656661844b4ff20dc9e17895,
     type: 3}
-  speed: 1
+  burnCheck: 0
+  paralysisCheck: 0
+  speed: 0.5
+  paralysis_time: 0
+  freezing_time: 0
 --- !u!54 &5067167778630374611
 Rigidbody:
   m_ObjectHideFlags: 0

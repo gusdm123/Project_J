@@ -234,6 +234,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 0
   hpBarPrefab: {fileID: 0}
+  burnCheck: 0
+  paralysisCheck: 0
 --- !u!114 &6261440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,8 +266,10 @@ MonoBehaviour:
   baseProjectile: {fileID: 37744423}
   firstProjectile: {fileID: 87333324}
   secondProjectile: {fileID: 1471727065}
-  thirdProjectile: {fileID: 0}
-  forthProjectile: {fileID: 0}
+  thirdProjectile: {fileID: 1523738783487391108, guid: 4cf0010669aced94e8a4b2c280bfc406,
+    type: 3}
+  forthProjectile: {fileID: 5823380466886794357, guid: 85b18b7f785915f408117faecd1d42eb,
+    type: 3}
   FinalDamage: 1
 --- !u!1 &37744423 stripped
 GameObject:
@@ -463,6 +467,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 138257290}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &90003324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 90003326}
+  - component: {fileID: 90003325}
+  m_Layer: 0
+  m_Name: CCManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &90003325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90003324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf3e7ac032525a4e9cd23ee74bd7444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &90003326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90003324}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.30851516, y: -0.8571211, z: -0.75285035}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &138257290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -765,7 +812,7 @@ PrefabInstance:
     - target: {fileID: 6963088445474601169, guid: 995a207dbdfc7f448a460d8a7cc7a94c,
         type: 3}
       propertyPath: waves.Array.data[0].enemyCount
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6963088445474601173, guid: 995a207dbdfc7f448a460d8a7cc7a94c,
         type: 3}
@@ -1674,7 +1721,7 @@ PrefabInstance:
     - target: {fileID: 6963088445474601169, guid: 995a207dbdfc7f448a460d8a7cc7a94c,
         type: 3}
       propertyPath: waves.Array.data[0].enemyCount
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6963088445474601173, guid: 995a207dbdfc7f448a460d8a7cc7a94c,
         type: 3}
@@ -1935,7 +1982,7 @@ PrefabInstance:
     - target: {fileID: 6963088445474601169, guid: 995a207dbdfc7f448a460d8a7cc7a94c,
         type: 3}
       propertyPath: waves.Array.data[0].enemyCount
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6963088445474601173, guid: 995a207dbdfc7f448a460d8a7cc7a94c,
         type: 3}
@@ -2021,7 +2068,7 @@ PrefabInstance:
     - target: {fileID: 6963088445474601169, guid: 995a207dbdfc7f448a460d8a7cc7a94c,
         type: 3}
       propertyPath: waves.Array.data[0].enemyCount
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6963088445474601173, guid: 995a207dbdfc7f448a460d8a7cc7a94c,
         type: 3}
@@ -2495,7 +2542,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1820142961}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6261441}
+        m_MethodName: SetForthprojectile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1820142961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2792,7 +2850,7 @@ PrefabInstance:
     - target: {fileID: 6963088445474601169, guid: 995a207dbdfc7f448a460d8a7cc7a94c,
         type: 3}
       propertyPath: waves.Array.data[0].enemyCount
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6963088445474601173, guid: 995a207dbdfc7f448a460d8a7cc7a94c,
         type: 3}

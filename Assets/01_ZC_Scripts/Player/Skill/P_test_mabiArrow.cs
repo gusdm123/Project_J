@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_test_normal : Skill_Projectile
+public class P_test_mabiArrow : Skill_Projectile
 {
     public GameObject hitEffect;
     public float damage = 1;
@@ -13,6 +13,7 @@ public class P_test_normal : Skill_Projectile
 
         if (damageableObject != null)
         {
+            CCManager.instance.StartParalysis(other, 3.0f, 1f);
             damageableObject.TakeHit(damage);
         }
 

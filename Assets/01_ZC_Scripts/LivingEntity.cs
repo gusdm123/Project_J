@@ -15,6 +15,9 @@ public class LivingEntity : MonoBehaviour , IDamageable
     protected float health;
     protected bool dead;
 
+    public bool burnCheck = false; // 화상 상태이상 인지 체크하는 변수
+    public bool paralysisCheck = false; // 마비 상태이상 인지 체크하는 변수
+
     public void Start()
     {
         health = startingHealth;
@@ -26,7 +29,7 @@ public class LivingEntity : MonoBehaviour , IDamageable
         _hpbar.targetTr = this.gameObject.transform;
     }
 
-    public void TakeHit(float damage, Collider hit)
+    public void TakeHit(float damage)
     {
         health -= damage * Weapon_gun.instance.FinalDamage;
         hpSlider.value = health / startingHealth;

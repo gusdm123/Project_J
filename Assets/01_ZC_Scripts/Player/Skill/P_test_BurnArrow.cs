@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class P_test_normal : Skill_Projectile
+public class P_test_BurnArrow : Skill_Projectile
 {
     public GameObject hitEffect;
     public float damage = 1;
+    public float burnDamage = 0.5f;
 
     public override void ProjectileSkillEffect(Collider other, GameObject main)
     {
@@ -13,6 +14,7 @@ public class P_test_normal : Skill_Projectile
 
         if (damageableObject != null)
         {
+            CCManager.instance.StartBurn(other, 3.0f, burnDamage, 1f);
             damageableObject.TakeHit(damage);
         }
 
