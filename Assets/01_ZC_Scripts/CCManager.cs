@@ -88,21 +88,111 @@ public class CCManager : MonoBehaviour
 
     public IEnumerator CC_Freezing(Collider target, float duration, float damage, float effectCycle) // 빙결 적 행동불가 및 상태이상 지속시간 동안 [데미지 주기] 마다 [지속 데미지]
     {
-        yield return new WaitForSeconds(Time.deltaTime);
+        if (target.GetComponent<LivingEntity>().freezingCheck == false)
+        {
+
+            target.GetComponent<LivingEntity>().freezingCheck = true;
+            target.GetComponent<Enemy>().freezing_time += duration;
+
+            while (true)
+            {
+                yield return new WaitForSeconds(effectCycle);
+                if (target != null)
+                {
+                    target.GetComponent<LivingEntity>().TakeHit(damage);
+                }
+
+                duration -= effectCycle;
+
+                if (duration <= 0)
+                    break;
+            }
+
+            if (target != null)
+            {
+                target.GetComponent<LivingEntity>().freezingCheck = false;
+            }
+        }
+    }
+
+    public void StartFreezing(Collider target, float duration, float damage, float effectCycle)
+    {
+        StartCoroutine(CC_Freezing(target,duration,damage,effectCycle));
     }
 
     public IEnumerator CC_Darkness(Collider target, float duration) // 암흑 지속시간 동안 이동방향 반대로
     {
-        yield return new WaitForSeconds(Time.deltaTime);
+        if (target.GetComponent<LivingEntity>().darknessCheck == false)
+        {
+            target.GetComponent<LivingEntity>().darknessCheck = true;
+            target.transform.eulerAngles = new Vector3(0f, 90f, 0f);
+
+            while (true)
+            {
+                yield return new WaitForSeconds(Time.deltaTime);
+
+                duration -= Time.deltaTime;
+
+                if (duration <= 0)
+                    break;
+            }
+
+            if (target != null)
+            {
+                target.transform.eulerAngles = new Vector3(0f, -90f, 0f);
+                target.GetComponent<LivingEntity>().darknessCheck = false;
+            }
+        }
     }
 
-    public IEnumerator CC_KnockBack(Collider target, float duration, float damage, float effectCycle) // 넉백 적을 뒤로 밀어냄 
+    public void StartDarkness(Collider target, float duration)
     {
-        yield return new WaitForSeconds(Time.deltaTime);
+        StartCoroutine(CC_Darkness(target, duration));
     }
 
-    public IEnumerator CC_Gravity(Collider target, Collider skill, float duration, float damage, float effectCycle) // 중력 스킬이 사용 된 지점으로 몬스터 강제 위치
+    public IEnumerator CC_KnockBack(Collider target, float duration,float power) // 넉백 적을 뒤로 밀어냄 
     {
-        yield return new WaitForSeconds(Time.deltaTime);
+        if (target.GetComponent<LivingEntity>().knockBackCheck == false)
+        {
+            target.GetComponent<LivingEntity>().knockBackCheck = true;
+
+            while (true)
+            {
+                if (target != null)
+                {
+                    target.transform.Translate(Vector3.back * Time.deltaTime * power);
+                }
+
+                yield return new WaitForSeconds(Time.deltaTime);
+
+                duration -= Time.deltaTime;
+
+                if (duration <= 0)
+                    break;
+            }
+
+            if (target != null)
+            {
+                target.GetComponent<LivingEntity>().knockBackCheck = false;
+            }
+        }
+    }
+
+    public void StartKnockBack(Collider target, float duration,float power)
+    {
+        StartCoroutine(CC_KnockBack(target, duration, power));
+    }
+
+    public IEnumerator CC_Gravity(Vector3 main, GameObject skill, float duration) // 중력 스킬이 사용 된 지점으로 몬스터 강제 위치
+    {
+        yield return new WaitForSeconds(0);
+        GameObject area = Instantiate(skill,main,transform.rotation);
+        area.GetComponent<Skill_stat>().duration_time = duration;
+        Destroy(area, duration);
+    }
+
+    public void StartGravity(Vector3 main, GameObject skill, float duration)
+    {
+        StartCoroutine(CC_Gravity(main, skill, duration));
     }
 }
