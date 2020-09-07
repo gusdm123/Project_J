@@ -6,6 +6,7 @@ public class Enemy : LivingEntity
 {
     public float speed = 3;
     bool moveCheck = false;
+    bool wallCheck = false;
 
     public float paralysis_time = 0;
     public float freezing_time = 0;
@@ -19,7 +20,7 @@ public class Enemy : LivingEntity
     {
         CheckCCTime();
 
-        if (!moveCheck)
+        if (!moveCheck && wallCheck == false)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
         }
@@ -52,7 +53,7 @@ public class Enemy : LivingEntity
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Wall") {
-            moveCheck = true;
+            wallCheck = true;
         }
     }
 }
