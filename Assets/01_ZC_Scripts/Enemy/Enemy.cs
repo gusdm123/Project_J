@@ -5,10 +5,13 @@ using UnityEngine;
 public class Enemy : LivingEntity
 {
     public float speed = 3;
-    bool moveCheck = false;
+
+    private bool moveCheck = false; // 움직임
+    private bool wallCheck = false; // 벽에 닿았는지
 
     public float paralysis_time = 0;
     public float freezing_time = 0;
+    public float gravity_time = 0;
 
     public void SetSpeed(float newSpeed)
     {
@@ -19,7 +22,7 @@ public class Enemy : LivingEntity
     {
         CheckCCTime();
 
-        if (!moveCheck)
+        if (!moveCheck && knockBackCheck == false && wallCheck == false)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
         }
@@ -45,14 +48,23 @@ public class Enemy : LivingEntity
                 freezing_time = 0;
         }
 
-        if (paralysis_time + freezing_time <= 0)
+        if (gravity_time > 0)
+        {
+            moveCheck = true;
+            gravity_time -= Time.deltaTime;
+
+            if (gravity_time < 0)
+                gravity_time = 0;
+        }
+
+        if (paralysis_time + freezing_time + gravity_time <= 0)
             moveCheck = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Wall") {
-            moveCheck = true;
+            wallCheck = true;
         }
     }
 }

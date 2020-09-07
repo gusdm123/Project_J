@@ -99,9 +99,11 @@ MonoBehaviour:
     type: 3}
   burnCheck: 0
   paralysisCheck: 0
-  speed: 0.5
+  freezingCheck: 0
+  speed: 1
   paralysis_time: 0
   freezing_time: 0
+  darkness_time: 0
 --- !u!54 &5067167778630374611
 Rigidbody:
   m_ObjectHideFlags: 0
