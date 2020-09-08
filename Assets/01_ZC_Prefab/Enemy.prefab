@@ -99,7 +99,6 @@ MonoBehaviour:
     type: 3}
   burnCheck: 0
   paralysisCheck: 0
-<<<<<<< HEAD
   speed: 10
 =======
   freezingCheck: 0
