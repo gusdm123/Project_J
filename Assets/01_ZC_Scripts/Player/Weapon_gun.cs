@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon_gun : MonoBehaviour
 {
@@ -23,9 +24,12 @@ public class Weapon_gun : MonoBehaviour
     private static Weapon_gun m_instance; // 싱글톤이 할당될 static 변수
 
     public Transform muzzle;
+    public Transform normalMuzzle; // 일반 투사체 공격을 위한 머즐
+    public Transform aoeMuzzle; // 범위공격을 위한 머즐
 
     public float msBetweenShots = 100;
     public float muzzleVelocity = 35;
+    private float currentBullet = 0;
 
     private float nextShotTime;
     private GameObject currentProjectile;
@@ -36,29 +40,50 @@ public class Weapon_gun : MonoBehaviour
     public GameObject thirdProjectile;
     public GameObject forthProjectile;
 
+    public Image[] skillCooldownImage;
+    public Image[] skillBulletGage;
+
+    public bool[] projectileCoolDownCheck = new bool[5]; // 1,2,3,4 로 스킬 관리
+
     public float FinalDamage = 1f;
 
     private void Start()
     {
         currentProjectile = baseProjectile;
+
+        for (int i = 1; i < 5; i++)
+            projectileCoolDownCheck[i] = false;
     }
 
     #region 투사체 세팅 함수
 
     public void SetFirstprojectile()
     {
-        if (firstProjectile.GetComponent<Projectile_normal>().buffSkillCheck == true)
+        if (currentProjectile == firstProjectile)
         {
-            firstProjectile.GetComponent<Projectile_normal>().current_Skill.BuffSkillEffect();
+            muzzle = normalMuzzle;
+            currentProjectile = baseProjectile;
         }
-        else
+        else if (projectileCoolDownCheck[1] == false)
         {
-            if (currentProjectile == firstProjectile)
+            StartCoroutine(CheckCoolDown(1, firstProjectile.GetComponent<Projectile_normal>().skillCooldown));
+
+            if (firstProjectile.GetComponent<Projectile_normal>().buffSkillCheck == true)
             {
-                currentProjectile = baseProjectile;
+                firstProjectile.GetComponent<Projectile_normal>().current_Skill.BuffSkillEffect();
+                StartCoroutine(StartBuffTime(1, firstProjectile.GetComponentInChildren<Skill_Projectile>().buffTime));
             }
             else
             {
+                currentBullet = firstProjectile.GetComponent<Projectile_normal>().skillBullet;
+
+                if (firstProjectile.GetComponent<Projectile_normal>().aoeSkillCheck == true)
+                {
+                    muzzle = aoeMuzzle;
+                }
+                else
+                    muzzle = normalMuzzle;
+
                 currentProjectile = firstProjectile;
             }
         }
@@ -66,18 +91,31 @@ public class Weapon_gun : MonoBehaviour
 
     public void SetSecondprojectile()
     {
-        if (secondProjectile.GetComponent<Projectile_normal>().buffSkillCheck == true)
+        if (currentProjectile == secondProjectile)
         {
-            secondProjectile.GetComponent<Projectile_normal>().current_Skill.BuffSkillEffect();
+            muzzle = normalMuzzle;
+            currentProjectile = baseProjectile;
         }
-        else
+        else if (projectileCoolDownCheck[2] == false)
         {
-            if (currentProjectile == secondProjectile)
+            StartCoroutine(CheckCoolDown(2, secondProjectile.GetComponent<Projectile_normal>().skillCooldown));
+
+            if (secondProjectile.GetComponent<Projectile_normal>().buffSkillCheck == true)
             {
-                currentProjectile = baseProjectile;
+                secondProjectile.GetComponent<Projectile_normal>().current_Skill.BuffSkillEffect();
+                StartCoroutine(StartBuffTime(2, secondProjectile.GetComponentInChildren<Skill_Projectile>().buffTime));
             }
             else
             {
+                currentBullet = secondProjectile.GetComponent<Projectile_normal>().skillBullet;
+
+                if (secondProjectile.GetComponent<Projectile_normal>().aoeSkillCheck == true)
+                {
+                    muzzle = aoeMuzzle;
+                }
+                else
+                    muzzle = normalMuzzle;
+
                 currentProjectile = secondProjectile;
             }
         }
@@ -85,18 +123,31 @@ public class Weapon_gun : MonoBehaviour
 
     public void SetThirdprojectile()
     {
-        if (thirdProjectile.GetComponent<Projectile_normal>().buffSkillCheck == true)
+        if (currentProjectile == thirdProjectile)
         {
-            thirdProjectile.GetComponent<Projectile_normal>().current_Skill.BuffSkillEffect();
+            muzzle = normalMuzzle;
+            currentProjectile = baseProjectile;
         }
-        else
+        else if (projectileCoolDownCheck[3] == false)
         {
-            if (currentProjectile == thirdProjectile)
+            StartCoroutine(CheckCoolDown(3, thirdProjectile.GetComponent<Projectile_normal>().skillCooldown));
+
+            if (thirdProjectile.GetComponent<Projectile_normal>().buffSkillCheck == true)
             {
-                currentProjectile = baseProjectile;
+                thirdProjectile.GetComponent<Projectile_normal>().current_Skill.BuffSkillEffect();
+                StartCoroutine(StartBuffTime(3, thirdProjectile.GetComponentInChildren<Skill_Projectile>().buffTime));
             }
             else
             {
+                currentBullet = thirdProjectile.GetComponent<Projectile_normal>().skillBullet;
+
+                if (thirdProjectile.GetComponent<Projectile_normal>().aoeSkillCheck == true)
+                {
+                    muzzle = aoeMuzzle;
+                }
+                else
+                    muzzle = normalMuzzle;
+
                 currentProjectile = thirdProjectile;
             }
         }
@@ -104,18 +155,31 @@ public class Weapon_gun : MonoBehaviour
 
     public void SetForthprojectile()
     {
-        if (forthProjectile.GetComponent<Projectile_normal>().buffSkillCheck == true)
+        if (currentProjectile == forthProjectile)
         {
-            forthProjectile.GetComponent<Projectile_normal>().current_Skill.BuffSkillEffect();
+            muzzle = normalMuzzle;
+            currentProjectile = baseProjectile;
         }
-        else
+        else if (projectileCoolDownCheck[4] == false)
         {
-            if (currentProjectile == forthProjectile)
+            StartCoroutine(CheckCoolDown(4, forthProjectile.GetComponent<Projectile_normal>().skillCooldown));
+
+            if (forthProjectile.GetComponent<Projectile_normal>().buffSkillCheck == true)
             {
-                currentProjectile = baseProjectile;
+                forthProjectile.GetComponent<Projectile_normal>().current_Skill.BuffSkillEffect();
+                StartCoroutine(StartBuffTime(4, forthProjectile.GetComponentInChildren<Skill_Projectile>().buffTime));
             }
             else
             {
+                currentBullet = forthProjectile.GetComponent<Projectile_normal>().skillBullet;
+
+                if (forthProjectile.GetComponent<Projectile_normal>().aoeSkillCheck == true)
+                {
+                    muzzle = aoeMuzzle;
+                }
+                else
+                    muzzle = normalMuzzle;
+
                 currentProjectile = forthProjectile;
             }
         }
@@ -124,6 +188,70 @@ public class Weapon_gun : MonoBehaviour
     //스킬이 버프인거를 체크 한뒤에 버프일 경우 SkillEffect 발동
 
     #endregion
+
+    private void SetBulletGage()
+    {
+        int skillNum = 0;
+
+        if (currentProjectile == firstProjectile)
+        {
+            skillNum = 0;
+        }
+        else if (currentProjectile == secondProjectile)
+        {
+            skillNum = 1;
+        }
+        else if (currentProjectile == thirdProjectile)
+        {
+            skillNum = 2;
+        }
+        else if (currentProjectile == forthProjectile)
+        {
+            skillNum = 3;
+        }     
+
+        if (currentProjectile != baseProjectile)
+        {      
+            skillBulletGage[skillNum].fillAmount -= 1 / currentProjectile.GetComponent<Projectile_normal>().skillBullet;
+        }
+    }
+
+    private IEnumerator CheckCoolDown(int skill,float coolDown)
+    {
+        projectileCoolDownCheck[skill] = true;
+        float currentCooldown = coolDown;
+        skillCooldownImage[skill - 1].fillAmount = 1;
+       
+        while (true)
+        {
+            skillCooldownImage[skill - 1].fillAmount -= 1 * Time.deltaTime / currentCooldown;
+            yield return new WaitForSeconds(Time.deltaTime);
+            coolDown -= Time.deltaTime;
+
+            if (coolDown <= 0)
+                break;
+        }
+        
+        projectileCoolDownCheck[skill] = false;
+        skillBulletGage[skill - 1].fillAmount = 1f;
+    }
+
+    private IEnumerator StartBuffTime(int skill,float buffTime)
+    {
+        float currentBuffTime = buffTime;
+
+        while (true)
+        {
+            skillBulletGage[skill - 1].fillAmount -= 1 * Time.deltaTime / currentBuffTime;
+            yield return new WaitForSeconds(Time.deltaTime);
+            buffTime -= Time.deltaTime;
+
+            if (buffTime <= 0)
+                break;
+        }
+
+        skillBulletGage[skill - 1].fillAmount = 1;
+    }
 
     public void Shoot()
     {
@@ -135,7 +263,16 @@ public class Weapon_gun : MonoBehaviour
             Destroy(playMuzzleEffect, 0.5f);
 
             newProjectile.GetComponent<Projectile_normal>().SetSpeed(muzzleVelocity);
-            GameObject.Destroy(newProjectile.gameObject, 3f);        
+            GameObject.Destroy(newProjectile.gameObject, 3f);
+
+            SetBulletGage();
+            currentBullet--;
+
+            if (currentBullet <= 0)
+            {
+                currentProjectile = baseProjectile;
+                muzzle = normalMuzzle;
+            }
         }
     }
 }

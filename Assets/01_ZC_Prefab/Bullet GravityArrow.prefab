@@ -33492,8 +33492,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current_Skill: {fileID: 6625802630166396854}
   buffSkillCheck: 0
+  aoeSkillCheck: 1
   muzzleEffect: {fileID: 1803844620122826, guid: 234fe1048a55b5c4b9639871508a25d7,
     type: 3}
+  skillCooldown: 5
+  skillBullet: 1
 --- !u!1 &5891022437783166635
 GameObject:
   m_ObjectHideFlags: 0

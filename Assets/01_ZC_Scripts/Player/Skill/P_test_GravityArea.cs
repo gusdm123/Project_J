@@ -13,15 +13,16 @@ public class P_test_GravityArea : Skill_stat
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
-
         if (other.tag == "Enemy")
         {
-            if (other.GetComponent<Enemy>().gravityCheck == false)
+            if (other.GetComponent<LivingEntity>() != null)
             {
-                other.GetComponent<Enemy>().gravity_time = duration_time;
+                if (other.GetComponent<LivingEntity>().gravityCheck == false)
+                {
+                    other.GetComponent<Enemy>().gravity_time = duration_time;
 
-                StartCoroutine(GravityEffect(other, duration_time));
+                    StartCoroutine(GravityEffect(other, duration_time));
+                }
             }
         }
     }

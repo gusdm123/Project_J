@@ -7,8 +7,13 @@ public class Projectile_normal : MonoBehaviour
 {
     public Skill_Projectile current_Skill;
     public bool buffSkillCheck = false;
+    public bool aoeSkillCheck = false;
     public GameObject muzzleEffect;
-    float speed = 10f;
+    public float skillCooldown = 5f;
+
+    public float skillBullet = 10;
+
+    private float speed = 10f;
 
     public void SetSpeed(float newSpeed)
     {
@@ -24,7 +29,7 @@ public class Projectile_normal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "Enemy" || other.tag == "Plane")
         {
             current_Skill.ProjectileSkillEffect(other,gameObject);
         }

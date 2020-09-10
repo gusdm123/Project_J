@@ -12,9 +12,10 @@ public class P_test_Gravity : Skill_Projectile
     {
         IDamageable damageableObject = other.GetComponent<IDamageable>();
 
+        CCManager.instance.StartGravity(main.transform.position, gravityArea, 3f);
+
         if (damageableObject != null)
-        {
-            CCManager.instance.StartGravity(main.transform.position,gravityArea, 3f);
+        {           
             damageableObject.TakeHit(damage);
         }
 

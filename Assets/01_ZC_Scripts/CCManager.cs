@@ -186,7 +186,7 @@ public class CCManager : MonoBehaviour
     public IEnumerator CC_Gravity(Vector3 main, GameObject skill, float duration) // 중력 스킬이 사용 된 지점으로 몬스터 강제 위치
     {
         yield return new WaitForSeconds(0);
-        GameObject area = Instantiate(skill,main,transform.rotation);
+        GameObject area = Instantiate(skill,new Vector3(main.x,1f,main.z),transform.rotation);
         area.GetComponent<Skill_stat>().duration_time = duration;
         Destroy(area, duration);
     }
@@ -194,5 +194,19 @@ public class CCManager : MonoBehaviour
     public void StartGravity(Vector3 main, GameObject skill, float duration)
     {
         StartCoroutine(CC_Gravity(main, skill, duration));
+    }
+
+    public IEnumerator Buff_DamageUp(float time)
+    {
+        Weapon_gun.instance.FinalDamage = 2.0f;
+
+        yield return new WaitForSeconds(time);
+
+        Weapon_gun.instance.FinalDamage = 1.0f;
+    }
+
+    public void StartDamageBuff(float time)
+    {
+        StartCoroutine(Buff_DamageUp(time));
     }
 }
