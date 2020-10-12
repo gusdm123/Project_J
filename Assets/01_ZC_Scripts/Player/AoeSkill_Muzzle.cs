@@ -24,6 +24,13 @@ public class AoeSkill_Muzzle : MonoBehaviour
             {
                 yield return time_deltatime;
             }
+            else if (Player.instance.auto_ModeCheck == true)
+            {
+                if (Player.instance.auto_Target != null)
+                {
+                    transform.LookAt(Player.instance.auto_Target.transform.position);
+                }
+            }
             else
             {
                 Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
@@ -33,7 +40,7 @@ public class AoeSkill_Muzzle : MonoBehaviour
                 groundPlane.Raycast(ray, out rayDistance);
 
                 Vector3 point = ray.GetPoint(rayDistance);
-                transform.LookAt(point);         
+                transform.LookAt(point);
             }
 
             yield return time_deltatime;

@@ -21,7 +21,14 @@ public class P_test_KnockBackArrow : Skill_Projectile
         playhitEffect.SetActive(true);
         Destroy(playhitEffect, 1.0f);
 
-        GameObject.Destroy(main);
+        if (Weapon_gun.instance.penetrationAttackCheck == true)
+        {
+            damage = damage * Weapon_gun.instance.penetrationDamage;
+        }
+        else
+        {
+            GameObject.Destroy(main);
+        }
     }
 
     public override void BuffSkillEffect()

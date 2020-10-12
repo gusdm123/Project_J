@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Bullet
   - Plane
+  - SideWall
   layers:
   - Default
   - TransparentFX

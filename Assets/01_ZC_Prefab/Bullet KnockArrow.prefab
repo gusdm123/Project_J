@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 188173518283910411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.8847113, y: 1.3038898, z: 1.974}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4117951069527353331}
   - {fileID: 5114486316158499623}
@@ -111,8 +111,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current_Skill: {fileID: 6239028558548009956}
   buffSkillCheck: 0
+  aoeSkillCheck: 0
   muzzleEffect: {fileID: 1234945742121850, guid: c40d8070d61c9bf4f8a990d469454b1d,
     type: 3}
+  skillCooldown: 5
+  skillBullet: 10
 --- !u!1 &5110510786697399533
 GameObject:
   m_ObjectHideFlags: 0
@@ -29459,6 +29462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b5a57eaea92964c81653f15cd721e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffTime: 5
   hitEffect: {fileID: 7836821825691087160}
   damage: 0.5
 --- !u!1 &7836821825691087160

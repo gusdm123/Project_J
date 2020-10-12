@@ -12,7 +12,7 @@ public class EnemyHealthBar : MonoBehaviour
     private RectTransform rectParent;
     private RectTransform rectHp;
 
-    private Vector3 offset;
+    public Vector3 offset;
 
     void Start()
     {

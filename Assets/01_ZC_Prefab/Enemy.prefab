@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5067167778630374613}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.5, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -100,10 +100,14 @@ MonoBehaviour:
   burnCheck: 0
   paralysisCheck: 0
   freezingCheck: 0
-  speed: 1
+  darknessCheck: 0
+  knockBackCheck: 0
+  gravityCheck: 0
+  speed: 2
   paralysis_time: 0
   freezing_time: 0
-  darkness_time: 0
+  gravity_time: 0
+  damage: 3
 --- !u!54 &5067167778630374611
 Rigidbody:
   m_ObjectHideFlags: 0

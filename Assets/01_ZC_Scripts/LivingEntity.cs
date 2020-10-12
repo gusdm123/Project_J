@@ -8,9 +8,9 @@ public class LivingEntity : MonoBehaviour , IDamageable
     public float startingHealth;
     public GameObject hpBarPrefab; 
 
-    private Slider hpSlider;
-    private Canvas hpCanvas;
-    private GameObject hpBar;
+    protected Slider hpSlider;
+    protected Canvas hpCanvas;
+    protected GameObject hpBar;
 
     protected float health;
     protected bool dead;
@@ -27,6 +27,7 @@ public class LivingEntity : MonoBehaviour , IDamageable
         health = startingHealth;
         hpCanvas = GameObject.Find("HPCanvas").GetComponent<Canvas>(); // 체력바 캔버스
         hpBar = Instantiate<GameObject>(hpBarPrefab, hpCanvas.transform); // 체력바 생성
+
         hpSlider = hpBar.GetComponentInChildren<Slider>();
 
         var _hpbar = hpBar.GetComponent<EnemyHealthBar>();
@@ -35,18 +36,19 @@ public class LivingEntity : MonoBehaviour , IDamageable
 
     public void TakeHit(float damage)
     {
+        float deadlyDamage = Random.Range(0f, 100f);
         health -= damage * Weapon_gun.instance.FinalDamage;
         hpSlider.value = health / startingHealth;
+
+        //deadlyDamage < Weapon_gun.instance.deadlyAttack; // 보류
 
         if (health <= 0) {
             Die();
         }
     }
 
-    public void Die()
+    protected virtual void Die()
     {
-        dead = true;
-        Destroy(hpBar);
-        Destroy(gameObject);
+       
     }
 }

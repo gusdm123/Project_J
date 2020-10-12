@@ -8,6 +8,7 @@ public class Projectile_normal : MonoBehaviour
     public Skill_Projectile current_Skill;
     public bool buffSkillCheck = false;
     public bool aoeSkillCheck = false;
+    public bool reflectCheck = true;
     public GameObject muzzleEffect;
     public float skillCooldown = 5f;
 
@@ -32,6 +33,11 @@ public class Projectile_normal : MonoBehaviour
         if (other.tag == "Enemy" || other.tag == "Plane")
         {
             current_Skill.ProjectileSkillEffect(other,gameObject);
+        }
+
+        if (other.tag == "SideWall" && Weapon_gun.instance.bounceAttackCheck == true)
+        {
+            transform.rotation = Quaternion.Euler(0f,180f - transform.rotation.eulerAngles.y,0f);
         }
     }
 }

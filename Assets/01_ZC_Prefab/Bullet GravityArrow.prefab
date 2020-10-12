@@ -33410,7 +33410,7 @@ Transform:
   m_GameObject: {fileID: 3051282908991086359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.8847113, y: 1.3038898, z: 1.974}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 1288370190757582319}
   - {fileID: 1934076102547311374}
@@ -62168,6 +62168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e13746d97a6824d8aa5e04048f3919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffTime: 5
   hitEffect: {fileID: 5891999865132162491}
   gravityArea: {fileID: 8771395177342043511, guid: 90ca9873ae67c124ba7c46f37dde80fe,
     type: 3}

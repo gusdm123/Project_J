@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : LivingEntity
 {
@@ -13,18 +14,59 @@ public class Enemy : LivingEntity
     public float freezing_time = 0;
     public float gravity_time = 0;
 
+    public float damage = 10f;
+
+    private void Start()
+    {
+        health = startingHealth;
+        hpCanvas = GameObject.Find("HPCanvas").GetComponent<Canvas>(); // 체력바 캔버스
+        hpBar = Instantiate<GameObject>(hpBarPrefab, hpCanvas.transform); // 체력바 생성
+
+        hpSlider = hpBar.GetComponentInChildren<Slider>();
+
+        var _hpbar = hpBar.GetComponent<EnemyHealthBar>();
+        _hpbar.targetTr = this.gameObject.transform;
+
+        StartCoroutine(CoroutineUpdate());
+    }
+
     public void SetSpeed(float newSpeed)
     {
-        speed = newSpeed;
+        speed = newSpeed;      
     }
-    // Update is called once per frame
-    void Update()
-    {
-        CheckCCTime();
 
-        if (!moveCheck && knockBackCheck == false && wallCheck == false)
+    // Update is called once per frame
+    IEnumerator CoroutineUpdate()
+    {
+        while (true)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            yield return new WaitForSeconds(Time.deltaTime);
+            CheckCCTime();
+
+            if (!moveCheck && knockBackCheck == false && wallCheck == false)
+            {
+                transform.Translate(Vector3.forward * Time.deltaTime * speed);               
+            }
+            else if (wallCheck == true)
+            {
+                Collider[] targets = Physics.OverlapSphere(transform.position, 13f);
+
+                if (targets.Length > 0)
+                {
+                    for (int i = 0; i < targets.Length; i++)
+                    {
+                        if (targets[i] != null)
+                        {
+                            if (targets[i].tag == "Player")
+                            {
+
+                                targets[i].GetComponent<LivingEntity>().TakeHit(damage);
+                                yield return new WaitForSeconds(2f);
+                            }
+                        }
+                    }                 
+                }
+            }          
         }
     }
 
@@ -66,5 +108,27 @@ public class Enemy : LivingEntity
         if (other.transform.tag == "Wall") {
             wallCheck = true;
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.tag == "Wall")
+        {
+            wallCheck = false;
+        }
+    }
+
+    protected override void Die()
+    {
+        dead = true;
+
+        if (Weapon_gun.instance.corpseExplosionCheck == true)
+        {
+            GameObject corpseExplosion = Instantiate(Weapon_gun.instance.corpseExplosionPrefab, gameObject.transform.position, gameObject.transform.rotation);
+            corpseExplosion.SetActive(true);
+        }
+
+        Destroy(hpBar);
+        Destroy(gameObject);
     }
 }
