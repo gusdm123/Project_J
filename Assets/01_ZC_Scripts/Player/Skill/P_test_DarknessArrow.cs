@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class P_test_DarknessArrow : Skill_Projectile
 {
-    public GameObject hitEffect;
     public float damage = 1;
 
     public override void ProjectileSkillEffect(Collider other, GameObject main)

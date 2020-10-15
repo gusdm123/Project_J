@@ -33,28 +33,30 @@ public class AssetDataManager : MonoBehaviour
     private void Awake()
     {
         skillList[0].s_Num = 1001;
-        skillList[0].s_Link = "Assets/01_ZC_Prefab/Bullet orb01_blue.prefab";
+        skillList[0].s_Link = "Prefab/Bullet orb01_blue";
 
         skillList[1].s_Num = 1002;
-        skillList[1].s_Link = "Assets/01_ZC_Prefab/Buff test DamageUp.prefab";
+        skillList[1].s_Link = "Prefab/Buff test DamageUp";
 
         skillList[2].s_Num = 1003;
-        skillList[2].s_Link = "Assets/01_ZC_Prefab/Bullet BurnArrow.prefab";
+        skillList[2].s_Link = "Prefab/Bullet BurnArrow";
 
         skillList[3].s_Num = 1004;
-        skillList[3].s_Link = "Assets/01_ZC_Prefab/Bullet DarknessArrow.prefab";
+        skillList[3].s_Link = "Prefab/Bullet DarknessArrow";
 
         skillList[4].s_Num = 1005;
-        skillList[4].s_Link = "Assets/01_ZC_Prefab/Bullet FreezingArrow.prefab";
+        skillList[4].s_Link = "Prefab/Bullet FreezingArrow";
 
         skillList[5].s_Num = 1006;
-        skillList[5].s_Link = "Assets/01_ZC_Prefab/Bullet GravityArrow.prefab";
+        skillList[5].s_Link = "Prefab/Bullet GravityArrow";
 
         skillList[6].s_Num = 1007;
-        skillList[6].s_Link = "Assets/01_ZC_Prefab/Bullet KnockArrow.prefab";
+        skillList[6].s_Link = "Prefab/Bullet KnockArrow";
 
         skillList[7].s_Num = 1008;
-        skillList[7].s_Link = "Assets/01_ZC_Prefab/Bullet MabiArrow.prefab";
+        skillList[7].s_Link = "Prefab/Bullet MabiArrow";
+
+        Screen.SetResolution(1080, 1920,false);
     }
 
     public string SkillAssetSearch(int skillNum)

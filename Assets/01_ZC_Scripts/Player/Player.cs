@@ -22,6 +22,11 @@ public class Player : LivingEntity
         }
     }
 
+    private Touch tempTouchs;
+    private Vector3 touchedPos;
+
+    private bool touchOn;
+
     private static Player m_instance; // 싱글톤이 할당될 static 변수
 
     private Camera viewCamera; // 메인 카메라 
@@ -92,10 +97,14 @@ public class Player : LivingEntity
         }
     }
 
+    public GameObject aoeMuzzle;
+
     IEnumerator CoroutineUpdate() // 업데이트 대체 함수
     {
         while (true)
         {
+
+#if UNITY_EDITOR
             if (EventSystem.current.IsPointerOverGameObject() == true)
             {
                 yield return time_deltatime;
@@ -118,6 +127,7 @@ public class Player : LivingEntity
             }
             else
             {
+                touchOn = false;
                 Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
                 Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
                 float rayDistance;
@@ -128,11 +138,40 @@ public class Player : LivingEntity
                 {
                     Vector3 point = ray.GetPoint(rayDistance);
                     controller.LookAt(point);
+                    aoeMuzzle.transform.LookAt(point);
                     Weapon_gun.instance.Shoot();
                 }
             }
+#else
+            if (Input.touchCount > 0)
+            {    //터치가 1개 이상이면.
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    tempTouchs = Input.GetTouch(i);
 
-            yield return time_deltatime;
+                    if (tempTouchs.position.y > Screen.height / 4)
+                    {
+                        touchOn = true;
+                        Ray ray = viewCamera.ScreenPointToRay(tempTouchs.position);
+                        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+                        float rayDistance;
+
+                        groundPlane.Raycast(ray, out rayDistance);
+
+                        Vector3 point = ray.GetPoint(rayDistance);
+                        controller.LookAt(point);
+                        aoeMuzzle.transform.LookAt(point);
+                        Weapon_gun.instance.Shoot();
+                        break;   //한 프레임(update)에는 하나만.                       
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+#endif        
+            yield return null;
         }
     }
 

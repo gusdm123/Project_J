@@ -1,0 +1,29 @@
+{
+  "users" : {
+    "aasd" : {
+      "_userGold" : 2755,
+      "_userName" : "aasd",
+      "_userScore" : 92
+    },
+    "asd" : {
+      "_userGold" : 0,
+      "_userName" : "asd",
+      "_userScore" : 51
+    },
+    "maple" : {
+      "_userGold" : 5473,
+      "_userName" : "maple",
+      "_userScore" : 5
+    },
+    "ss" : {
+      "_userGold" : 3204,
+      "_userName" : "ss",
+      "_userScore" : 58
+    },
+    "부리또" : {
+      "_userGold" : 0,
+      "_userName" : "부리또",
+      "_userScore" : 64
+    }
+  }
+}

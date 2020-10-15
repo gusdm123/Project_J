@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Skill_Projectile : MonoBehaviour
 {
+    public GameObject hitEffect;
     public float buffTime = 5f;
 
     public abstract void ProjectileSkillEffect(Collider enemy,GameObject main);

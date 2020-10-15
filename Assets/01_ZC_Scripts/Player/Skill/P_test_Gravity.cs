@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class P_test_Gravity : Skill_Projectile
 {
-    public GameObject hitEffect;
     public GameObject gravityArea;
     public float damage = 1;
 

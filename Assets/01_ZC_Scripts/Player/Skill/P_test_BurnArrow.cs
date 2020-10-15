@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class P_test_BurnArrow : Skill_Projectile
 {
-    public GameObject hitEffect;
     public float damage = 1;
     public float burnDamage = 0.5f;
 

@@ -60,20 +60,29 @@ public class Weapon_gun : MonoBehaviour
 
     public float penetrationDamage = 0.6f; // 관통후 감소 데미지 변수
     public float FinalDamage = 1f; // 최종 데미지
-    public float deadlyAttack = 0f; // 즉사 확률
+    public float deadlyAttack = 0f; // 즉사 확률0
 
     private void Start()
     {
-        baseProjectile = (GameObject)AssetDatabase.LoadAssetAtPath(AssetDataManager.instance.SkillAssetSearch(1001),typeof(GameObject));
-        firstProjectile = (GameObject)AssetDatabase.LoadAssetAtPath(AssetDataManager.instance.SkillAssetSearch(1002), typeof(GameObject));
-        secondProjectile = (GameObject)AssetDatabase.LoadAssetAtPath(AssetDataManager.instance.SkillAssetSearch(1004), typeof(GameObject));
-        thirdProjectile = (GameObject)AssetDatabase.LoadAssetAtPath(AssetDataManager.instance.SkillAssetSearch(1005), typeof(GameObject));
-        forthProjectile = (GameObject)AssetDatabase.LoadAssetAtPath(AssetDataManager.instance.SkillAssetSearch(1006), typeof(GameObject));
+        baseProjectile = Resources.Load(AssetDataManager.instance.SkillAssetSearch(1001)) as GameObject;
+        firstProjectile = Resources.Load(AssetDataManager.instance.SkillAssetSearch(1004)) as GameObject;
+        secondProjectile = Resources.Load(AssetDataManager.instance.SkillAssetSearch(1005)) as GameObject;
+        thirdProjectile = Resources.Load(AssetDataManager.instance.SkillAssetSearch(1006)) as GameObject;
+        forthProjectile = Resources.Load(AssetDataManager.instance.SkillAssetSearch(1007)) as GameObject;
 
         currentProjectile = baseProjectile;
 
         for (int i = 1; i < 5; i++)
             projectileCoolDownCheck[i] = false;
+    }
+
+    private void OnGUI()
+    {
+        diagonalAttackCheck = GUI.Toggle(new Rect(880, 25, 100, 25), diagonalAttackCheck, "Diagonal");
+        plusAttackCheck = GUI.Toggle(new Rect(880, 50, 100, 25), plusAttackCheck, "Plus");
+        bounceAttackCheck = GUI.Toggle(new Rect(880, 75, 100, 25), bounceAttackCheck, "Bounce");
+        penetrationAttackCheck = GUI.Toggle(new Rect(880, 100, 100, 25), penetrationAttackCheck, "Penetration");
+        corpseExplosionCheck = GUI.Toggle(new Rect(880, 125, 100, 25), corpseExplosionCheck, "CorpseExplosion");
     }
 
     #region 투사체 세팅 함수

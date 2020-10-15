@@ -247,8 +247,8 @@ PlayerSettings:
   AndroidTargetArchitectures: 1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: "C:/Users/kos45/OneDrive/\uBC14\uD0D5 \uD654\uBA74/project_j_key.keystore"
-  AndroidKeyaliasName: jam
+  AndroidKeystoreName: '{inproject}: user.keystore'
+  AndroidKeyaliasName: doridorigemgem
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

@@ -31,17 +31,6 @@ public class AoeSkill_Muzzle : MonoBehaviour
                     transform.LookAt(Player.instance.auto_Target.transform.position);
                 }
             }
-            else
-            {
-                Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
-                Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-                float rayDistance;
-
-                groundPlane.Raycast(ray, out rayDistance);
-
-                Vector3 point = ray.GetPoint(rayDistance);
-                transform.LookAt(point);
-            }
 
             yield return time_deltatime;
         }
