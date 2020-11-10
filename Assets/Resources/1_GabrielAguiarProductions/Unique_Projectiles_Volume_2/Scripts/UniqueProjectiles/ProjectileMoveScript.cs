@@ -1,18 +1,8 @@
 ﻿//
-//
 //NOTES:
-//
 //This script is used for DEMONSTRATION porpuses of the Projectiles. I recommend everyone to create their own code for their own projects.
-//THIS IS JUST A BASIC EXAMPLE PUT TOGETHER TO DEMONSTRATE VFX ASSETS.
+//This is just a basic example.
 //
-//
-
-
-
-
-#pragma warning disable 0168 // variable declared but not used.
-#pragma warning disable 0219 // variable assigned but not used.
-#pragma warning disable 0414 // private field assigned but not used.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -20,8 +10,6 @@ using UnityEngine;
 
 public class ProjectileMoveScript : MonoBehaviour {
 
-    public bool rotate = false;
-    public float rotateAmount = 45;
     public bool bounce = false;
     public float bounceForce = 10;
     public float speed;
@@ -30,6 +18,8 @@ public class ProjectileMoveScript : MonoBehaviour {
 	public float fireRate;
 	public GameObject muzzlePrefab;
 	public GameObject hitPrefab;
+	public AudioClip shotSFX;
+	public AudioClip hitSFX;
 	public List<GameObject> trails;
 
     private Vector3 startPos;
@@ -76,15 +66,17 @@ public class ProjectileMoveScript : MonoBehaviour {
 				Destroy (muzzleVFX, psChild.main.duration);
 			}
 		}
+
+		if (shotSFX != null && GetComponent<AudioSource>()) {
+			GetComponent<AudioSource> ().PlayOneShot (shotSFX);
+		}
 	}
 
 	void FixedUpdate () {
         if (target != null)
             rotateToMouse.RotateToMouse (gameObject, target.transform.position);
-        if (rotate)
-            transform.Rotate(0, 0, rotateAmount, Space.Self);
         if (speed != 0 && rb != null)
-			rb.position += (transform.forward + offset) * (speed * Time.deltaTime);   
+			rb.position += (transform.forward + offset) * (speed * Time.deltaTime);        
     }
 
 	void OnCollisionEnter (Collision co) {
@@ -93,6 +85,11 @@ public class ProjectileMoveScript : MonoBehaviour {
             if (co.gameObject.tag != "Bullet" && !collided)
             {
                 collided = true;
+
+                if (shotSFX != null && GetComponent<AudioSource>())
+                {
+                    GetComponent<AudioSource>().PlayOneShot(hitSFX);
+                }
 
                 if (trails.Count > 0)
                 {

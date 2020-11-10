@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Projectile_normal : MonoBehaviour
@@ -10,6 +11,9 @@ public class Projectile_normal : MonoBehaviour
     public bool aoeSkillCheck = false;
     public bool reflectCheck = true;
     public GameObject muzzleEffect;
+
+    public Sprite skillIcon;
+
     public float skillCooldown = 5f;
 
     public float skillBullet = 10;

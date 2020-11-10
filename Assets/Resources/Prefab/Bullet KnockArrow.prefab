@@ -112,8 +112,10 @@ MonoBehaviour:
   current_Skill: {fileID: 6239028558548009956}
   buffSkillCheck: 0
   aoeSkillCheck: 0
+  reflectCheck: 1
   muzzleEffect: {fileID: 1234945742121850, guid: c40d8070d61c9bf4f8a990d469454b1d,
     type: 3}
+  skillIcon: {fileID: 21300000, guid: 9ae9c74b1787c1a4db8c70479fe0c939, type: 3}
   skillCooldown: 5
   skillBullet: 10
 --- !u!1 &5110510786697399533
@@ -29462,8 +29464,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b5a57eaea92964c81653f15cd721e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffTime: 5
   hitEffect: {fileID: 7836821825691087160}
+  buffTime: 5
   damage: 0.5
 --- !u!1 &7836821825691087160
 GameObject:

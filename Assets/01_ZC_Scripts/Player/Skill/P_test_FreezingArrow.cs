@@ -12,8 +12,9 @@ public class P_test_FreezingArrow : Skill_Projectile
 
         if (damageableObject != null)
         {
-            CCManager.instance.StartFreezing(other, 3.0f,0.5f, 1f);
-            damageableObject.TakeHit(damage);
+            CCManager.instance.StartFreezing(other, 3.0f, DamageManager.instance.CharacterDamage(main.transform).damage * damage, 1f);
+            damageableObject.TakeHit(DamageManager.instance.CharacterDamage(main.transform).damage * damage);
+            UIManager.instance.SetFloating(main.transform, DamageManager.instance.CharacterDamage(main.transform), damage);
         }
 
         GameObject playhitEffect = Instantiate(hitEffect, main.transform.position, main.transform.rotation);

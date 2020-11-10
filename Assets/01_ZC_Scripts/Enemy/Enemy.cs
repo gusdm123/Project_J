@@ -16,6 +16,8 @@ public class Enemy : LivingEntity
 
     public float damage = 10f;
 
+    public GameObject dropItem;
+
     private void Start()
     {
         health = startingHealth;
@@ -121,6 +123,9 @@ public class Enemy : LivingEntity
     protected override void Die()
     {
         dead = true;
+
+        GameObject item = Instantiate(dropItem, transform.position, Quaternion.identity);
+        Backpack.instance.ItemDrop();
 
         if (Weapon_gun.instance.corpseExplosionCheck == true)
         {

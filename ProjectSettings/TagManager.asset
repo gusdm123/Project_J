@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Plane
   - SideWall
+  - Backpack
   layers:
   - Default
   - TransparentFX

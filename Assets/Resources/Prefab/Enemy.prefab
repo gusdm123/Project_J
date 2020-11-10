@@ -103,11 +103,13 @@ MonoBehaviour:
   darknessCheck: 0
   knockBackCheck: 0
   gravityCheck: 0
-  speed: 1.5
+  speed: 3
   paralysis_time: 0
   freezing_time: 0
   gravity_time: 0
-  damage: 3
+  damage: 10
+  dropItem: {fileID: 7040362362786124878, guid: ee545e35b04a92d498a038191b9173ef,
+    type: 3}
 --- !u!54 &5067167778630374611
 Rigidbody:
   m_ObjectHideFlags: 0

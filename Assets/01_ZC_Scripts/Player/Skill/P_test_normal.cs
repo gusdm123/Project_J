@@ -12,7 +12,8 @@ public class P_test_normal : Skill_Projectile
 
         if (damageableObject != null)
         {
-            damageableObject.TakeHit(damage);
+            damageableObject.TakeHit(DamageManager.instance.CharacterDamage(main.transform).damage * damage);
+            UIManager.instance.SetFloating(main.transform, DamageManager.instance.CharacterDamage(main.transform),damage);
         }
 
         GameObject playhitEffect = Instantiate(hitEffect, main.transform.position, main.transform.rotation);

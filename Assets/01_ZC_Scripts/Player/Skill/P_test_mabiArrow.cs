@@ -13,7 +13,8 @@ public class P_test_mabiArrow : Skill_Projectile
         if (damageableObject != null)
         {
             CCManager.instance.StartParalysis(other, 3.0f, 1f);
-            damageableObject.TakeHit(damage);
+            damageableObject.TakeHit(DamageManager.instance.CharacterDamage(main.transform).damage * damage);
+            UIManager.instance.SetFloating(main.transform, DamageManager.instance.CharacterDamage(main.transform), damage);
         }
 
         GameObject playhitEffect = Instantiate(hitEffect, main.transform.position, main.transform.rotation);

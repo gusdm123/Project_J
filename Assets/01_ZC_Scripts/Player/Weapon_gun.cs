@@ -47,6 +47,8 @@ public class Weapon_gun : MonoBehaviour
     public GameObject thirdProjectile;
     public GameObject forthProjectile;
 
+    public Image[] skillIcon;
+
     public Image[] skillCooldownImage;
     public Image[] skillBulletGage;
 
@@ -70,6 +72,11 @@ public class Weapon_gun : MonoBehaviour
         thirdProjectile = Resources.Load(AssetDataManager.instance.SkillAssetSearch(1006)) as GameObject;
         forthProjectile = Resources.Load(AssetDataManager.instance.SkillAssetSearch(1007)) as GameObject;
 
+        skillIcon[0].sprite = firstProjectile.GetComponent<Projectile_normal>().skillIcon;
+        skillIcon[1].sprite = secondProjectile.GetComponent<Projectile_normal>().skillIcon;
+        skillIcon[2].sprite = thirdProjectile.GetComponent<Projectile_normal>().skillIcon;
+        skillIcon[3].sprite = forthProjectile.GetComponent<Projectile_normal>().skillIcon;
+
         currentProjectile = baseProjectile;
 
         for (int i = 1; i < 5; i++)
@@ -88,7 +95,7 @@ public class Weapon_gun : MonoBehaviour
     #region 투사체 세팅 함수
 
     public void SetFirstprojectile()
-    {
+    {       
         if (currentProjectile == firstProjectile)
         {
             muzzle = normalMuzzle;

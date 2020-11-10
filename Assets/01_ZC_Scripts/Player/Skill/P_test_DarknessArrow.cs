@@ -13,7 +13,8 @@ public class P_test_DarknessArrow : Skill_Projectile
         if (damageableObject != null)
         {
             CCManager.instance.StartDarkness(other, 3.0f);
-            damageableObject.TakeHit(damage);
+            damageableObject.TakeHit(DamageManager.instance.CharacterDamage(main.transform).damage * damage);
+            UIManager.instance.SetFloating(main.transform, DamageManager.instance.CharacterDamage(main.transform), damage);
         }
 
         GameObject playhitEffect = Instantiate(hitEffect, main.transform.position, main.transform.rotation);

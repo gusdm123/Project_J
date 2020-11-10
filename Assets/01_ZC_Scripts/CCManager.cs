@@ -24,6 +24,8 @@ public class CCManager : MonoBehaviour
 
     public IEnumerator CC_Burn(Collider target, float duration, float damage, float effectCycle) // 화상 적에게 상태이상 지속시간 동안 [데미지 주기] 마다 [지속 데미지]
     {
+        damage = damage * 0.8f;
+
         if (target.GetComponent<LivingEntity>().burnCheck == false) {
 
             target.GetComponent<LivingEntity>().burnCheck = true;
@@ -33,6 +35,7 @@ public class CCManager : MonoBehaviour
                 if (target != null)
                 {
                     target.GetComponent<LivingEntity>().TakeHit(damage);
+                    UIManager.instance.SetFloating(target.transform, DamageManager.instance.CharacterDamage(target.transform), damage);
                 }
                
                 duration -= effectCycle;
@@ -88,6 +91,8 @@ public class CCManager : MonoBehaviour
 
     public IEnumerator CC_Freezing(Collider target, float duration, float damage, float effectCycle) // 빙결 적 행동불가 및 상태이상 지속시간 동안 [데미지 주기] 마다 [지속 데미지]
     {
+        damage = damage * 0.4f;
+
         if (target.GetComponent<LivingEntity>().freezingCheck == false)
         {
 
@@ -100,6 +105,7 @@ public class CCManager : MonoBehaviour
                 if (target != null)
                 {
                     target.GetComponent<LivingEntity>().TakeHit(damage);
+                    UIManager.instance.SetFloating(target.transform, DamageManager.instance.CharacterDamage(target.transform), damage);
                 }
 
                 duration -= effectCycle;

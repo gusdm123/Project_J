@@ -33496,6 +33496,7 @@ MonoBehaviour:
   reflectCheck: 1
   muzzleEffect: {fileID: 1803844620122826, guid: 234fe1048a55b5c4b9639871508a25d7,
     type: 3}
+  skillIcon: {fileID: 21300000, guid: 128900c02542b5e4f83c37fbaef717a5, type: 3}
   skillCooldown: 5
   skillBullet: 20
 --- !u!1 &5891022437783166635

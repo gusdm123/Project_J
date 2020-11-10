@@ -13,7 +13,8 @@ public class P_test_KnockBackArrow : Skill_Projectile
         if (damageableObject != null)
         {
             CCManager.instance.StartKnockBack(other, 0.25f,3f);
-            damageableObject.TakeHit(damage);
+            damageableObject.TakeHit(DamageManager.instance.CharacterDamage(main.transform).damage * damage);
+            UIManager.instance.SetFloating(main.transform, DamageManager.instance.CharacterDamage(main.transform), damage);
         }
 
         GameObject playhitEffect = Instantiate(hitEffect, main.transform.position, main.transform.rotation);

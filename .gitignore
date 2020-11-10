@@ -26,8 +26,12 @@
 .gradle/
 
 # 리소스 폴더 제외
-Assets/01_Resource/
-Assets/1_GabrielAguiarProductions/
+Assets/Resources/1_GabrielAguiarProductions/
+Assets/Resources/Bayat/
+Assets/Resources/EverProbe/
+Assets/Resources/Hovl Studio/
+Assets/Resources/Suriyun
+Assets/Resources/GabrielAguiarProductions
 Assets/ExternalDependencyManager/
 Assets/Firebase/
 Assets/GooglePlayGames/

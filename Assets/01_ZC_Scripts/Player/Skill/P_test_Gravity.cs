@@ -14,8 +14,9 @@ public class P_test_Gravity : Skill_Projectile
         CCManager.instance.StartGravity(main.transform.position, gravityArea, 3f);
 
         if (damageableObject != null)
-        {           
-            damageableObject.TakeHit(damage);
+        {
+            damageableObject.TakeHit(DamageManager.instance.CharacterDamage(main.transform).damage * damage);
+            UIManager.instance.SetFloating(main.transform, DamageManager.instance.CharacterDamage(main.transform), damage);
         }
 
         GameObject playhitEffect = Instantiate(hitEffect, main.transform.position, main.transform.rotation);
